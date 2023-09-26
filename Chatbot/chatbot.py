@@ -1,6 +1,6 @@
 import os
-import ssl
 import nltk
+import ssl
 import streamlit as st
 import random
 from sklearn.feature_extraction.text import TfidfVectorizer
@@ -8,7 +8,7 @@ from sklearn.linear_model import LogisticRegression
 
 ssl._create_default_https_context = ssl._create_unverified_context
 nltk.data.path.append(os.path.abspath("nltk_data"))
-nltk.download('punkt')
+nltk.download("punk")
 
 intents = [
     {
@@ -70,8 +70,8 @@ clf = LogisticRegression(random_state=0, max_iter=10000)
 tags = []
 patterns = []
 for intent in intents:
-    for pattern in intent['patterns']:
-        tags.append(intent['tag'])
+    for pattern in intent["patterns"]:
+        tags.append(intent["tag"])
         patterns.append(pattern)
 
 x = vectorizer.fit_transform(patterns)
@@ -83,7 +83,7 @@ def chatbot(input_text):
     tag = clf.predict(input_text)[0]
     for intent in intents:
         if intent['tag'] == tag:
-            response = random.choice(intent['responses'])
+            response = random.choice(intent["responses"])
             return response
         
 counter = 0
@@ -104,5 +104,5 @@ def main():
             st.write("Thank you for chatting with me. Have a great day!")
             st.stop()
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
